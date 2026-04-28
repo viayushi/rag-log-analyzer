@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RAG Log Assistant
 
 A local web app, API, and CLI for natural-language log analysis over Elasticsearch.
@@ -100,3 +101,7 @@ That means local no-auth Elasticsearch can pass health checks without forcing an
 - [Manual setup](docs/MANUAL_SETUP.md)
 - [Quickstart](docs/QUICKSTART.md)
 - [2GB guide](docs/SETUP_2GB_GUIDE.md)
+=======
+# rag-log-analyzer
+RAG-based Log Analyzer using Elasticsearch. The system retrieves relevant logs using hybrid search and uses an LLM to generate human-readable root cause analysis.
+>>>>>>> b82451fea3e7d12501b57d4fed6a4b2e37159abe
