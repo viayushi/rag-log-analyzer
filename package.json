@@ -1,0 +1,23 @@
+{
+  "name": "kibana",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/cli/index.js",
+  "scripts": {
+    "elastic:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/windows/start_elasticsearch.ps1",
+    "seed": "node src/scripts/seed.js",
+    "start": "node src/cli/index.js",
+    "query": "node src/cli/index.js",
+    "dev": "node src/server/app.js",
+    "test": "node --test --test-isolation=none"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@elastic/elasticsearch": "^9.3.4",
+    "@google/generative-ai": "^0.17.0",
+    "dotenv": "^17.4.2"
+  }
+}

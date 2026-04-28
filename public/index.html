@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RAG Log Assistant</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Operations Console</p>
+          <h1>RAG Log Assistant</h1>
+        </div>
+        <div id="health-pill" class="health-pill health-pill--loading">Checking system</div>
+      </header>
+
+      <main class="workspace">
+        <section class="query-panel">
+          <form id="query-form" class="query-form">
+            <label class="query-label" for="query-input">Ask about your logs</label>
+            <div class="query-row">
+              <input id="query-input" name="query" type="text" placeholder="Show validation errors for subscriber 89661" required>
+              <button type="submit" class="primary-action">Analyze</button>
+              <button type="button" id="retrieve-button" class="secondary-action">Retrieve only</button>
+            </div>
+
+            <div class="filter-grid">
+              <label>
+                <span>Time range</span>
+                <select id="time-filter" name="timeRange">
+                  <option value="">Auto</option>
+                  <option value="last_15m">Last 15 minutes</option>
+                  <option value="last_1h">Last hour</option>
+                  <option value="last_6h">Last 6 hours</option>
+                  <option value="last_24h">Last 24 hours</option>
+                  <option value="today">Today</option>
+                  <option value="yesterday">Yesterday</option>
+                  <option value="last_7d">Last 7 days</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Application</span>
+                <select id="service-filter" name="service">
+                  <option value="">Auto</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Level</span>
+                <select id="level-filter" name="level">
+                  <option value="">Auto</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Subscriber ID</span>
+                <input id="subscriber-filter" name="subscriberId" type="text" inputmode="numeric" placeholder="89661">
+              </label>
+
+              <label>
+                <span>Top logs</span>
+                <input id="top-k-input" name="topK" type="number" min="1" max="20" value="12">
+              </label>
+            </div>
+          </form>
+        </section>
+
+        <section class="content-grid">
+          <section class="result-panel">
+            <div class="panel-header">
+              <h2>Analysis</h2>
+              <p id="query-summary" class="muted">Submit a query to analyze retrieved evidence.</p>
+            </div>
+
+            <div id="loading-state" class="state state--hidden">Working through retrieval and analysis...</div>
+            <div id="error-state" class="state state--error state--hidden"></div>
+            <div id="empty-state" class="state">No analysis yet.</div>
+
+            <div id="analysis-view" class="analysis-view state--hidden">
+              <section class="analysis-block">
+                <h3>Summary</h3>
+                <p id="answer-summary"></p>
+              </section>
+
+              <section class="analysis-metrics">
+                <div>
+                  <span class="metric-label">Severity</span>
+                  <strong id="answer-severity">-</strong>
+                </div>
+                <div>
+                  <span class="metric-label">Applications</span>
+                  <strong id="answer-services">-</strong>
+                </div>
+                <div>
+                  <span class="metric-label">Evidence logs</span>
+                  <strong id="answer-evidence-count">0</strong>
+                </div>
+              </section>
+
+              <section class="analysis-block">
+                <h3>Likely causes</h3>
+                <ul id="answer-causes" class="list"></ul>
+              </section>
+
+              <section class="analysis-block">
+                <h3>Recommended next steps</h3>
+                <ul id="answer-next-steps" class="list"></ul>
+              </section>
+            </div>
+          </section>
+
+          <section class="evidence-panel">
+            <div class="panel-header">
+              <h2>Retrieved Evidence</h2>
+              <p id="evidence-meta" class="muted">No logs loaded.</p>
+            </div>
+            <div id="evidence-list" class="evidence-list"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+  </html>
